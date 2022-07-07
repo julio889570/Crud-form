@@ -2,17 +2,24 @@ import './App.css';
 import {nanoid} from 'nanoid'
 import UserTable from './components/UserTable';
 import AddUserForm from './components/AddUserForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import EditUserForm from './components/EditUserForm';
 
 function App() {
-  const userData = [
+  const [userData, setUserData ] = useState([
     {id:nanoid(), name: 'Tania', userName:'floppydiskette'},
     {id:nanoid(), name: 'Craig', userName:'floppy1234'},
     {id:nanoid(), name: 'Jhon', userName:'Cdroom'}
-  ]
+  ]) 
+
+  useEffect(() => {
+    localStorage.setItem('userreact-app', JSON.stringify(userData))
+  }, [userData])
+  
 
   const [users, setUsers] = useState(userData);
+
+
 
   const addUser = (user)=>{
     user.id = nanoid();
